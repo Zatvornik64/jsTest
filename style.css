@@ -1,0 +1,174 @@
+/* char-remover */
+.char-remover {
+  width: 800px;
+  height: 300px;
+  background-color: blue;
+  color: white;
+}
+h2 {
+  font-size: 36px;
+  margin-left: 20px;
+}
+p {
+  margin-left: 20px;
+}
+.words {
+  width: 90%;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 2px;
+  margin-left: 20px;
+  background-color: white;
+  color: black;
+}
+
+.result {
+  width: 20%;
+  height: 30px;
+  line-height: 30px;
+  background-color: yellow;
+  text-align: center;
+  margin-left: 20px;
+  color: black;
+  cursor: pointer;
+}
+
+
+.math-calculator {
+  margin-top: 40px;
+  width: 800px;
+  height: 300px;
+  background-color: green;
+  color: white;
+}
+
+
+
+.butterfly-control {
+  margin-left: 80px;
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 22px;
+  width: 600px;
+  height: 200px;
+  border: 2px solid #777777;
+  border-radius: 15px;
+}
+.butterfly-control .centre-unit {
+  margin-top: 45px;
+}
+.butterfly-control .left-unit, .right-unit {
+  margin-top: 20px;
+}
+.butterfly-control b {
+  margin-left: 10px;
+}
+.butterfly-control .btn {
+  background-color: #eeeeee;
+  border: 2px solid #777777;
+  border-radius: 10px;
+  width: 70px;
+  margin-top: 3px;
+  text-align: center;
+  cursor: pointer;
+
+}
+.butterfly-control .items {
+  width: 100px;
+  height: 130px;
+  border: 2px solid #777777;
+  border-radius: 8px;
+}
+.butterfly-control .block {
+  cursor: pointer;
+  text-align: center;
+}
+.butterfly-control .moved {
+  background-color: #777777;
+}
+.alert {
+  position: absolute;
+  margin-top: -50px;
+  height: 30px;
+  width: 600px;
+  line-height: 30px;
+  background-color: #999999;
+  border: 2px solid black;
+  border-radius: 15px;
+  display: none;
+}
+
+
+.simple-gallery {
+  width: 800px;
+  height: 300px;
+  background-color: black;
+  color: #eeeeee;
+  border-radius: 20px;
+  margin-top: 70px;
+  position: relative;
+}
+.menu {
+  display: flex;
+}
+.menu div {
+  width: 70px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 20px;
+  background-color: gray;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 10px;
+  color: black;
+}
+.menu-unit {
+  cursor: pointer;
+}
+.counter {
+  position: absolute;
+  left: 680px;
+  border-radius: 10px;
+}
+.slider {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 600px;
+  height: 150px;
+  line-height: 100px;
+  text-align: center;
+  background-color: green;
+  border-radius: 20px;
+  display: none;
+}
+.showing {
+  display: block;
+}
+.question {
+  position: absolute;
+  top: 120px;
+  left: 150px;
+  background-color: orange;
+  width: 500px;
+  height: 100px;
+  border-radius: 15px;
+  color: black;
+  font-size: 26px;
+  display: flex;
+  opacity: 0;
+}
+.question div{
+  margin-top: 35px;
+  margin-left: 60px;
+  padding-left: 10px;
+  width: 25%;
+  height: 30%;
+  border: 2px solid red;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.showing2 {
+  opacity: 1;
+}
