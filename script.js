@@ -64,7 +64,7 @@ inputMath.addEventListener('keypress', function(evt){
 
 var math = function(string) {
   let tempMatch = inputMath.value.replace(/ /g, '');  //убираем пробелы
-  let mathItems = inputMath.value.match(/\d+(?:[\.]\d+)?/g);  //разбираем на массив чисел
+  let mathItems = inputMath.value.match(/\d+(.\d+)?/g);  //разбираем на массив чисел 
   let result = +mathItems[0];
   let counter = mathItems[0].length - 1;  //счетчик позиции следующего математического оператора
   for (let i=1; i < mathItems.length; i++) {
