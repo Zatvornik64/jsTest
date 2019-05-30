@@ -64,7 +64,7 @@ inputMath.addEventListener('keypress', function(evt){
 
 var math = function(string) {
   let tempMatch = inputMath.value.replace(/ /g, '');  //убираем пробелы
-  let mathItems = inputMath.value.match(/\d+(.\d+)?/g);  //разбираем на массив чисел 
+  let mathItems = inputMath.value.match(/\d+(.\d+)?/g);  //разбираем на массив чисел
   let result = +mathItems[0];
   let counter = mathItems[0].length - 1;  //счетчик позиции следующего математического оператора
   for (let i=1; i < mathItems.length; i++) {
@@ -88,17 +88,25 @@ let butterflyCentreBlock = document.querySelector('.centre-unit');
 let butterflyCentreBlocks = document.querySelectorAll('.centre-unit .btn');
 let butterflyBlocks = document.querySelectorAll('.butterfly-control .block');
 let alert = document.querySelector('.alert');
+let test = {};
 
-var butterfly = function (leftBlock, centreBlock, rightBlock){ // функция бабочка работающая с любым подобным блоком
-  leftBlock.addEventListener('click', function(event){ // выделение блоков слева для переноса
+var butterfly = function (leftBlock, centreBlock, rightBlock, test){ // функция бабочка работающая с любым подобным блоком
+
+  //console.log(test);
+  //leftBlock.addEventListener('click', function(event){ // выделение блоков слева для переноса
+    if (test.parentNode === leftBlock) {
+    event.target.classList.toggle('moved');
+    //console.log(test);
+    alert.style.display = 'none';
+  }
+
+  //rightBlock.addEventListener('click', function(event){ // выделение блоков справа для переноса
+  if (test.parentNode === rightBlock) {
     event.target.classList.toggle('moved');
     alert.style.display = 'none';
-  })
-  rightBlock.addEventListener('click', function(event){ // выделение блоков справа для переноса
-    event.target.classList.toggle('moved');
-    alert.style.display = 'none';
-  })
-  centreBlock.addEventListener('click', function(event){ // выбор действия
+  }
+  //centreBlock.addEventListener('click', function(event){ // выбор действия
+  if (test.parentNode === centreBlock) {
     //console.log(event.target);
     let leftBlockLength = leftBlock.children.length;
     let rightBlockLength = rightBlock.children.length;
@@ -142,10 +150,12 @@ var butterfly = function (leftBlock, centreBlock, rightBlock){ // функция
         leftBlock.appendChild(rightBlock.children[0]);
       }
     };
-  })
+  }
 }
 // вызов функции бабочка с передачей ей аргументов именно этой бабочки
-butterflyControl.addEventListener('mousedown', butterfly(butterflyLeftBlock, butterflyCentreBlock, butterflyRightBlock));
+butterflyControl.addEventListener('mousedown', function(evt){
+  butterfly (butterflyLeftBlock, butterflyCentreBlock, butterflyRightBlock, evt.target);
+});
 
 
 
