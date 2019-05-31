@@ -64,15 +64,39 @@ inputMath.addEventListener('keypress', function(evt){
 
 var math = function(string) {
   let tempMatch = inputMath.value.replace(/ /g, '');  //убираем пробелы
-  let mathItems = inputMath.value.match(/\d+(?:[\.]\d+)?/g);  //разбираем на массив чисел (/\d+(?:[\.]\d+)?/g)  (/\d+(.\d+)?/g)
-  let result = +mathItems[0];
-  let counter = mathItems[0].length - 1;  //счетчик позиции следующего математического оператора
+  let mathItems = inputMath.value.match(/\d+(?:\.\d+)?/g);  //разбираем на массив чисел (/\d+(?:[\.]\d+)?/g)
+  let result = 0;
+  let counter = mathItems[0].length - 1;
+  console.log(mathItems)
+  if (mathItems === null) {
+    resultMath.textContent = 'введите хоть что нибудь';
+    return;
+  }
+    else {
+      console.log(tempMatch.charCodeAt(0));
+      //console.log(typeof(+tempMatch[0]));
+      if (tempMatch.charCodeAt(0) < 48){
+        console.log('Не число');
+        counter = -1;
+        //console.log(result);
+    }
+        else {result = +mathItems[0];}
+    }
+
+    //счетчик позиции следующего математического оператора
   for (let i=1; i < mathItems.length; i++) {
-    if (tempMatch[counter + 1] == '=') break;
-    if (tempMatch[counter + 1] == '+') result += +mathItems[i];
-    if (tempMatch[counter + 1] == '-') result -= +mathItems[i];
-    if (tempMatch[counter + 1] == '*') result *= +mathItems[i];
-    if (tempMatch[counter + 1] == '/') result /= +mathItems[i];
+    console.log('counter = ' + counter);
+    console.log(mathItems[i]);
+    console.log('result ' + result);
+    switch (tempMatch[counter + 1]) {
+
+      case '=' : break;
+      case '+' : result += +mathItems[i]; break;
+      case '-' : result -= +mathItems[i]; break;
+      case '*' : result *= +mathItems[i]; break;
+      case '/' : result /= +mathItems[i]; break;
+    }
+
     counter += mathItems[i].length + 1;
   }
   resultMath.textContent = result.toFixed(2);
