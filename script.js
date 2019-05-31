@@ -64,7 +64,7 @@ inputMath.addEventListener('keypress', function(evt){
 
 var math = function(string) {
   let tempMatch = inputMath.value.replace(/ /g, '');  //убираем пробелы
-  let mathItems = inputMath.value.match(/\d+(.\d+)?/g);  //разбираем на массив чисел
+  let mathItems = inputMath.value.match(/\d+(?:[\.]\d+)?/g);  //разбираем на массив чисел (/\d+(?:[\.]\d+)?/g)  (/\d+(.\d+)?/g)
   let result = +mathItems[0];
   let counter = mathItems[0].length - 1;  //счетчик позиции следующего математического оператора
   for (let i=1; i < mathItems.length; i++) {
@@ -88,70 +88,57 @@ let butterflyCentreBlock = document.querySelector('.centre-unit');
 let butterflyCentreBlocks = document.querySelectorAll('.centre-unit .btn');
 let butterflyBlocks = document.querySelectorAll('.butterfly-control .block');
 let alert = document.querySelector('.alert');
-let test = {};
+let target = {};
 
-var butterfly = function (leftBlock, centreBlock, rightBlock, test){ // функция бабочка работающая с любым подобным блоком
 
-  //console.log(test);
-  //leftBlock.addEventListener('click', function(event){ // выделение блоков слева для переноса
-    if (test.parentNode === leftBlock) {
-    event.target.classList.toggle('moved');
-    //console.log(test);
+
+
+var butterfly = function (leftBlock, centreBlock, rightBlock, target){ // функция бабочка работающая с любым подобным блоком
+
+  let move = function(from, to) {
+    let al = 0;
+    for (let i = 0; i < from.children.length; i++) {
+      if (from.children[i].classList.contains('moved')) {
+        al++;                                             // счетчик выделенных блоков
+        from.children[i].classList.remove('moved');
+        to.appendChild(from.children[i]);
+        i--;
+    }};
+    if (al < 1) alert.style.display = 'block'; // предупреждение о необходимости выделения блоков
+  }
+
+  let moveAll = function(from, to) {
+    let fromLength = from.children.length;
+    let toLength = to.children.length;
     alert.style.display = 'none';
-  }
+    for (let i = 0; i < fromLength; i++) {
+      from.children[0].classList.remove('moved');
+      to.appendChild(from.children[0]);
+  }}
 
-  //rightBlock.addEventListener('click', function(event){ // выделение блоков справа для переноса
-  if (test.parentNode === rightBlock) {
-    event.target.classList.toggle('moved');
-    alert.style.display = 'none';
-  }
-  //centreBlock.addEventListener('click', function(event){ // выбор действия
-  if (test.parentNode === centreBlock) {
-    //console.log(event.target);
-    let leftBlockLength = leftBlock.children.length;
-    let rightBlockLength = rightBlock.children.length;
-
-    if (event.target === butterflyCentreBlocks[0]) { // перенос всего вправо
+  switch (target.parentNode) {
+    case leftBlock:
+    case rightBlock:
+      event.target.classList.toggle('moved');
       alert.style.display = 'none';
-      for (let i = 0; i < leftBlockLength; i++) {
-        leftBlock.children[0].classList.remove('moved');
-        rightBlock.appendChild(leftBlock.children[0]);
+      break;
+    case centreBlock:
+      switch (event.target) {
+        case butterflyCentreBlocks[0]:
+          moveAll(leftBlock, rightBlock);
+          break;
+        case butterflyCentreBlocks[1]:
+          move(leftBlock, rightBlock);
+          break;
+        case butterflyCentreBlocks[2]:
+          move(rightBlock, leftBlock);
+          break;
+        case butterflyCentreBlocks[3]:
+          moveAll(rightBlock, leftBlock);
+          break;
       }
-    };
-
-    if (event.target === butterflyCentreBlocks[1]) { // перенос выделенных элементов вправо
-      let al = 0;
-      for (let i = 0; i < leftBlock.children.length; i++) {
-        if (leftBlock.children[i].classList.contains('moved')) {
-          al++;                                             // счетчик выделенных блоков
-          leftBlock.children[i].classList.remove('moved');
-          rightBlock.appendChild(leftBlock.children[i]);
-          i--;
-      }};
-      if (al < 1) alert.style.display = 'block'; // предупреждение о необходимости выделения блоков
-    }
-
-    if (event.target === butterflyCentreBlocks[2]) { // перенос выделенных элементов влево
-      let al = 0;
-      for (let i = 0; i < rightBlock.children.length; i++) {
-        if (rightBlock.children[i].classList.contains('moved')) {
-          al++;
-          rightBlock.children[i].classList.remove('moved');
-          leftBlock.appendChild(rightBlock.children[i]);
-          i--;
-    }}
-    if (al < 1) alert.style.display = 'block';
   }
-
-    if (event.target === butterflyCentreBlocks[3]) { // перенос всех элементов влево
-      alert.style.display = 'none';
-      for (let i = 0; i < rightBlockLength; i++) {
-        rightBlock.children[0].classList.remove('moved');
-        leftBlock.appendChild(rightBlock.children[0]);
-      }
-    };
   }
-}
 // вызов функции бабочка с передачей ей аргументов именно этой бабочки
 butterflyControl.addEventListener('mousedown', function(evt){
   butterfly (butterflyLeftBlock, butterflyCentreBlock, butterflyRightBlock, evt.target);
