@@ -55,49 +55,57 @@ let inputMath = document.querySelector('.input-math');
 let resultMath = document.querySelector('.result-math');
 let resultMathButton = document.querySelector('.math-calculator .result');
 
-resultMathButton.addEventListener('click', function(evt) {
-  math();
-});
+resultMathButton.addEventListener('click', function(evt) {math();});
+
 inputMath.addEventListener('keypress', function(evt){
   if(event.keyCode == 13) { math();}
 });
 
-var math = function(string) {
+let math = function(string) {
   let tempMatch = inputMath.value.replace(/ /g, '');  //убираем пробелы
   let mathItems = inputMath.value.match(/\d+(?:\.\d+)?/g);  //разбираем на массив чисел (/\d+(?:[\.]\d+)?/g)
   let result = 0;
-  let counter = mathItems[0].length - 1;
-  console.log(mathItems)
+  let itemStartCounter;
+  let counter;
+  
+  if (tempMatch.indexOf('=') < 0) {
+    resultMath.textContent = 'вы забыли ввести символ =';
+    return;
+  }
+  for (let i = 0; i < tempMatch.length - 1; i++) {
+  if (tempMatch.charCodeAt(i) < 48 && tempMatch.charCodeAt(i + 1) < 48){
+    resultMath.textContent = 'вы забыли ввести числа между операторами';
+    return;
+    }
+  }
+
   if (mathItems === null) {
     resultMath.textContent = 'введите хоть что нибудь';
     return;
   }
     else {
-      console.log(tempMatch.charCodeAt(0));
-      //console.log(typeof(+tempMatch[0]));
       if (tempMatch.charCodeAt(0) < 48){
-        console.log('Не число');
         counter = -1;
-        //console.log(result);
-    }
-        else {result = +mathItems[0];}
+        itemStartCounter = 0;
+      }
+        else {
+          result = +mathItems[0];
+          counter = mathItems[0].length - 1;
+          itemStartCounter = 1;
+        }
     }
 
     //счетчик позиции следующего математического оператора
-  for (let i=1; i < mathItems.length; i++) {
-    console.log('counter = ' + counter);
-    console.log(mathItems[i]);
-    console.log('result ' + result);
+  for (itemStartCounter; itemStartCounter < mathItems.length; itemStartCounter++) {
+
     switch (tempMatch[counter + 1]) {
-
       case '=' : break;
-      case '+' : result += +mathItems[i]; break;
-      case '-' : result -= +mathItems[i]; break;
-      case '*' : result *= +mathItems[i]; break;
-      case '/' : result /= +mathItems[i]; break;
+      case '+' : result += +mathItems[itemStartCounter]; break;
+      case '-' : result -= +mathItems[itemStartCounter]; break;
+      case '*' : result *= +mathItems[itemStartCounter]; break;
+      case '/' : result /= +mathItems[itemStartCounter]; break;
     }
-
-    counter += mathItems[i].length + 1;
+    counter += mathItems[itemStartCounter].length + 1;
   }
   resultMath.textContent = result.toFixed(2);
 }
