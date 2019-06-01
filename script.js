@@ -201,7 +201,7 @@ let nextpage = function() {
       if (currentPage == urls.length - 1) { //условие выхода после последнего слайда
         stopPoint = 1 };
         currentPage = (currentPage+1)%urls.length; //обновление слайда
-        win = window.open(urls[currentPage], 'win', 'width=1000, height=550, left=50, top=80');
+        win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
       if (stopPoint) {  //скрытие слайдов и открытие окна запроса дальнейшего действия
           clearInterval(pageInterval);
           question.classList.add('showing2');
@@ -209,7 +209,7 @@ let nextpage = function() {
 }}
 
 pagesBlock.addEventListener('click', function(evt){  // Кнопки управления перелистывание
-  let win = window.open(urls[currentPage], 'win', 'width=1000, height=550, left=50, top=80');
+  let win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
   switch (event.target) {
 
   case pagesControl[0]: { // действие кнопки Стоп
@@ -227,17 +227,17 @@ pagesBlock.addEventListener('click', function(evt){  // Кнопки управ�
     }
   case pagesControl[2]: { //действие кнопки Предыдущий
     if (currentPage > 0 ) currentPage--;
-    win = window.open(urls[currentPage], 'win', 'width=1000, height=550, left=50, top=80');
+    win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
     break;
     }
   case pagesControl[3]: { //действие кнопки Следующий
     if (currentPage < urls.length - 1) currentPage++;
-    win = window.open(urls[currentPage], 'win', 'width=1000, height=550, left=50, top=80');
+    win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
     break;
     }
   case qiestionItems[0]: {  //запуск слайдера заново
     question.classList.remove('showing2');
-    win = window.open(urls[currentPage], 'win', 'width=1000, height=550, left=50, top=80');
+    win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
     pageInterval = setInterval(nextpage,1000);
     pageGo = 1;
     break;
