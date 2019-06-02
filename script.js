@@ -211,7 +211,7 @@ let nextpage = function() {
       }
 }}
 
-pagesBlock.addEventListener('click', function(evt){  // Кнопки управления перелистывание
+/*pagesBlock.addEventListener('click', function(evt){  // Кнопки управления перелистывание
   let win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
   switch (event.target) {
 
@@ -251,4 +251,4 @@ pagesBlock.addEventListener('click', function(evt){  // Кнопки управ�
     break;
   }
   }
-})
+})*/
