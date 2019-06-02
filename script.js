@@ -22,9 +22,11 @@ var charRemove = function(string) {
     tempCode[i] = tempText[i].charCodeAt();
 
     if (tempCode[i] > 1071 && tempCode[i] < 1104) {resultTemp = resultTemp + originalText[i]};
-    if (tempCode[i] == 32) {resultTemp = resultTemp + ' '};
+    if (tempCode[i] == 32 && resultTemp.substr(-1) !== ' ') {resultTemp = resultTemp + ' '};
   }
   let tempText2 = resultTemp.toLowerCase().split(' ');
+  console.log(resultTemp);
+  console.log(tempText2);
   let counter = {};
 
   //счетчик количества букв
@@ -41,6 +43,7 @@ var charRemove = function(string) {
   //сборка текста из оригинального без букв определенных в счетчике выше
   let resultTemp2 = [];
   for (let i = 0; i < resultTemp.length; i++) {
+    tempCode[i] = resultTemp[i].charCodeAt();
     if (counter[resultTemp[i].toLowerCase().charCodeAt()] == 0)  {resultTemp2 = resultTemp2 + resultTemp[i]};
     if (tempCode[i] == 32) {resultTemp2 = resultTemp2 + ' '};
   }
