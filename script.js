@@ -25,8 +25,6 @@ var charRemove = function(string) {
     if (tempCode[i] == 32 && resultTemp.substr(-1) !== ' ') {resultTemp = resultTemp + ' '};
   }
   let tempText2 = resultTemp.toLowerCase().split(' ');
-  console.log(resultTemp);
-  console.log(tempText2);
   let counter = {};
 
   //счетчик количества букв
@@ -185,7 +183,7 @@ butterflyControl.addEventListener('mousedown', function(evt){
 let pagesControl = document.querySelectorAll('.menu-unit');
 let pagesBlock = document.querySelector('.simple-gallery');
 let pagesControlMenu = document.querySelector('.menu');
-let urls = ['http://ya.ru', 'http://google.com', 'http:/bing.com', 'http://aol.com'];
+let urls = ['index1.html', 'http://google.com', 'http:/bing.com', 'http://aol.com'];
 let pagesCounter = document.querySelector('.counter');
 let question = document.querySelector('.question');
 let qiestionItems = document.querySelectorAll('.question div')
@@ -195,24 +193,15 @@ let count = interval;
 let currentPage = 0;
 let pageGo = 0;
 
-let nextpage = function() {
-    count--;
-    let stopPoint; // точка выхода из пролистывания
-    pagesCounter.textContent = count; // вывод обратного отсчета
-      if (count == 0) {
-        count = interval; //обновление счетчика
-      if (currentPage == urls.length - 1) { //условие выхода после последнего слайда
-        stopPoint = 1 };
-        currentPage = (currentPage+1)%urls.length; //обновление слайда
-        win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
-      if (stopPoint) {  //скрытие слайдов и открытие окна запроса дальнейшего действия
-          clearInterval(pageInterval);
-          question.classList.add('showing2');
-      }
-}}
 
-/*pagesBlock.addEventListener('click', function(evt){  // Кнопки управления перелистывание
+pagesBlock.addEventListener('click', function(evt){  // Кнопки управления перелистывание
   let win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
+  //let div = pagesBlock.cloneNode(true);
+  console.log(win.document);
+  win.document.body.appendChild(pagesBlock);
+  //win.document.body.appendChild(div);
+  //div.className = "alert alert-success";
+  //div.innerHTML = "<strong>Ура!</strong>";
   switch (event.target) {
 
   case pagesControl[0]: { // действие кнопки Стоп
@@ -230,25 +219,44 @@ let nextpage = function() {
     }
   case pagesControl[2]: { //действие кнопки Предыдущий
     if (currentPage > 0 ) currentPage--;
-    win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
+    win.location.href = urls[currentPage];
     break;
     }
   case pagesControl[3]: { //действие кнопки Следующий
     if (currentPage < urls.length - 1) currentPage++;
-    win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
+    win.location.href = urls[currentPage];
     break;
     }
   case qiestionItems[0]: {  //запуск слайдера заново
     question.classList.remove('showing2');
-    win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
+    win.location.href = urls[currentPage];
     pageInterval = setInterval(nextpage,1000);
     pageGo = 1;
     break;
     }
   case qiestionItems[1]: { //закрытие слайда
     win.close();
+    pageGo = 0;
     question.classList.remove('showing2');
     break;
   }
   }
-})*/
+
+  function nextpage() {
+      count--;
+      let stopPoint; // точка выхода из пролистывания
+      pagesCounter.textContent = count; // вывод обратного отсчета
+        if (count == 0) {
+          count = interval; //обновление счетчика
+        if (currentPage == urls.length - 1) { //условие выхода после последнего слайда
+          stopPoint = 1 };
+          currentPage = (currentPage+1)%urls.length; //обновление слайда
+          win.location.href = urls[currentPage];
+        if (stopPoint) {  //скрытие слайдов и открытие окна запроса дальнейшего действия
+            clearInterval(pageInterval);
+            question.classList.add('showing2');
+        }
+  }}
+
+
+})
