@@ -183,7 +183,7 @@ butterflyControl.addEventListener('mousedown', function(evt){
 let pagesControl = document.querySelectorAll('.menu-unit');
 let pagesBlock = document.querySelector('.simple-gallery');
 let pagesControlMenu = document.querySelector('.menu');
-let urls = ['http://ya.ru', 'http://google.com', 'http:/bing.com', 'http://aol.com'];
+let urls = ['index1.html', 'index2.html', 'index3.html', 'index4.html'];
 let pagesCounter = document.querySelector('.counter');
 let question = document.querySelector('.question');
 let qiestionItems = document.querySelectorAll('.question div')
@@ -195,7 +195,13 @@ let pageGo = 0;
 
 
 pagesBlock.addEventListener('click', function(evt){  // Кнопки управления перелистывание
-  let win = window.open(urls[currentPage], 'win', 'width=1000, height=400, left=50, top=80');
+  let win = window.open(urls[currentPage], 'win'/*, 'width=1000, height=400, left=50, top=80'*/);
+  //let div = pagesBlock.cloneNode(true);
+  //console.log(win.document.body);
+  win.document.body.insertBefore(pagesBlock, win.document.body.children[0]);
+  //win.document.body.appendChild(div);
+  //div.className = "alert alert-success";
+  //div.innerHTML = "<strong>Ура!</strong>";
   switch (event.target) {
 
   case pagesControl[0]: { // действие кнопки Стоп
