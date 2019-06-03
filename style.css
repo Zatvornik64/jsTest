@@ -161,3 +161,14 @@ p {
 .showing2 {
   z-index: 2
 }
+.simple-gallery-win {
+  width: 600px;
+  height: 200px;
+  background-color: #eeeeee;
+  color: #000000;
+  font-size: 46px;
+  text-align: center;
+  line-height: 150px;
+  border: solid 2px #000000;
+  border-radius: 20px;
+}
