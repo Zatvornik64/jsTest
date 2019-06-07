@@ -29,20 +29,20 @@ var charRemove = function(string) {
 
   //счетчик количества букв
   for (let i = 1072; i < 1104; i++) { //цикл по коду букв
-    counter[i] = 0;
+    counter[i - 1072] = 0;
     for (let k=0; k < tempText2.length; k++) { //цикл по количеству слов
 
     for (let j = 0; j < tempText2[k].length; j++) { //цикл по буквам в словах
-      if (i == tempText2[k][j].toLowerCase().charCodeAt()) {counter[i]++}
+      if (i == tempText2[k][j].toLowerCase().charCodeAt()) {counter[i - 1072]++}
     }
-      if (counter[i] == 1) counter[i] = 0; //сброс счетчика при одинственной букве в слове
+      if (counter[i - 1072] == 1) counter[i - 1072] = 0; //сброс счетчика при одинственной букве в слове
     }}
 
   //сборка текста из оригинального без букв определенных в счетчике выше
   let resultTemp2 = [];
   for (let i = 0; i < resultTemp.length; i++) {
     tempCode[i] = resultTemp[i].charCodeAt();
-    if (counter[resultTemp[i].toLowerCase().charCodeAt()] == 0)  {resultTemp2 = resultTemp2 + resultTemp[i]};
+    if (counter[resultTemp[i].toLowerCase().charCodeAt() - 1072] == 0)  {resultTemp2 = resultTemp2 + resultTemp[i]};
     if (tempCode[i] == 32) {resultTemp2 = resultTemp2 + ' '};
   }
   resultText.textContent = resultTemp2;
