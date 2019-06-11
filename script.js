@@ -12,7 +12,7 @@ if(event.keyCode == 13) {
   charRemove();
 }});
 
-var charRemove = function(string) {
+let charRemove = function(string) {
   let tempText = inputText.value.toLowerCase().split('');
   let originalText = inputText.value.split('');
   let tempCode = [];
@@ -126,7 +126,7 @@ let target = {};
 
 
 
-var butterfly = function (leftBlock, centreBlock, rightBlock, target){ // функция бабочка работающая с любым подобным блоком
+let butterfly = function (leftBlock, centreBlock, rightBlock, target){ // функция бабочка работающая с любым подобным блоком
 
   let move = function(from, to) {
     let al = 0;
