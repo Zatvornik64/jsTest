@@ -23,7 +23,6 @@ const charRemove = function(string) {
     if (tempCode[i] > 1071 && tempCode[i] < 1104) {resultTemp = resultTemp + originalText[i]};
     if (tempCode[i] == 32 && resultTemp.substr(-1) !== ' ') {resultTemp = resultTemp + ' '};
   }
-  console.log(resultTemp);
   const tempText2 = resultTemp.toLowerCase().split(' ');
   const counter = {};
 
@@ -128,9 +127,6 @@ const butterflyBlocks = document.querySelectorAll('.butterfly-control .block');
 const alert = document.querySelector('.alert');
 const target = {};
 
-
-
-
 const butterfly = function (leftBlock, centreBlock, rightBlock, target){ // функция бабочка работающая с любым подобным блоком
 
   const move = function(from, to) {
@@ -160,8 +156,7 @@ const butterfly = function (leftBlock, centreBlock, rightBlock, target){ // фу
   }
   switch (event.target) {
         case butterflyCentreBlocks[0]:
-          console.log(leftBlock.children)
-          //moveAll(leftBlock, rightBlock);
+          moveAll(leftBlock, rightBlock);
           break;
         case butterflyCentreBlocks[1]:
           move(leftBlock, rightBlock);
