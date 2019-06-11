@@ -1,18 +1,18 @@
 //Simple Gallery
-let pagesControl = document.querySelectorAll('.menu-unit');
-let pagesBlock = document.querySelector('.simple-gallery');
-let pagesControlMenu = document.querySelector('.menu');
-let urls = ['index1.html', 'index2.html', 'index3.html', 'index4.html'];
-let pagesCounter = document.querySelector('.counter');
-let question = document.querySelector('.question');
-let qiestionItems = document.querySelectorAll('.question div')
-let interval = 11;  //Интервал перелистывания, сек
+const pagesControl = document.querySelectorAll('.menu-unit');
+const pagesBlock = document.querySelector('.simple-gallery');
+const pagesControlMenu = document.querySelector('.menu');
+const urls = ['index1.html', 'index2.html', 'index3.html', 'index4.html'];
+const pagesCounter = document.querySelector('.counter');
+const question = document.querySelector('.question');
+const qiestionItems = document.querySelectorAll('.question div')
+const interval = 11;  //Интервал перелистывания, сек
 let pageInterval;
 let count = interval;
 let currentPage = (+window.location.href.replace('.html', '').split('').slice(-1) - 1);
 let pageGo = 1;
 
-let nextpage = function() {
+const nextpage = function() {
     count--;
     pagesCounter.textContent = count; // вывод обратного отсчета
       if (count == 0) {
