@@ -121,13 +121,13 @@ const math = function(string) {
 const butterflyControl = document.querySelector('.butterfly-control');
 const butterflyLeftBlock = document.querySelector('.left-items');
 const butterflyRightBlock = document.querySelector('.right-items');
-const butterflyCentreBlock = document.querySelector('.centre-unit');
-const butterflyCentreBlocks = document.querySelectorAll('.centre-unit .btn');
+const butterflycenterBlock = document.querySelector('.center-unit');
+const butterflycenterBlocks = document.querySelectorAll('.center-unit .btn');
 const butterflyBlocks = document.querySelectorAll('.butterfly-control .block');
 const alert = document.querySelector('.alert');
 const target = {};
 
-const butterfly = function (leftBlock, centreBlock, rightBlock, target){ // функция бабочка работающая с любым подобным блоком
+const butterfly = function (leftBlock, centerBlock, rightBlock, target){ // функция бабочка работающая с любым подобным блоком
 
   const move = function(from, to) {
     let al = 0;
@@ -155,23 +155,23 @@ const butterfly = function (leftBlock, centreBlock, rightBlock, target){ // фу
     alert.style.display = 'none';
   }
   switch (event.target) {
-        case butterflyCentreBlocks[0]:
+        case butterflycenterBlocks[0]:
           moveAll(leftBlock, rightBlock);
           break;
-        case butterflyCentreBlocks[1]:
+        case butterflycenterBlocks[1]:
           move(leftBlock, rightBlock);
           break;
-        case butterflyCentreBlocks[2]:
+        case butterflycenterBlocks[2]:
           move(rightBlock, leftBlock);
           break;
-        case butterflyCentreBlocks[3]:
+        case butterflycenterBlocks[3]:
           moveAll(rightBlock, leftBlock);
           break;
   }
   }
 // вызов функции бабочка с передачей ей аргументов именно этой бабочки
 butterflyControl.addEventListener('mousedown', function(evt){
-  butterfly (butterflyLeftBlock, butterflyCentreBlock, butterflyRightBlock, evt.target);
+  butterfly (butterflyLeftBlock, butterflycenterBlock, butterflyRightBlock, evt.target);
 });
 
 
