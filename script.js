@@ -1,8 +1,7 @@
 // Char remover
-//У ПОпа! !! быЛА соБАка
-let inputText = document.querySelector('.input-words');
-let resultText = document.querySelector('.result-words');
-let resultCharButton = document.querySelector('.char-remover .result');
+const inputText = document.querySelector('.input-words');
+const resultText = document.querySelector('.result-words');
+const resultCharButton = document.querySelector('.char-remover .result');
 
 resultCharButton.addEventListener('click', function(evt) {
   charRemove();
@@ -12,20 +11,24 @@ if(event.keyCode == 13) {
   charRemove();
 }});
 
-let charRemove = function(string) {
-  let tempText = inputText.value.toLowerCase().split('');
-  let originalText = inputText.value.split('');
+const charRemove = function(string) {
+  const tempText = inputText.value.toLowerCase().split('');
+  const originalText = inputText.value.split('');
   let tempCode = [];
   let resultTemp = [];
 
   for (let i = 0; i < tempText.length; i++) {
     tempCode[i] = tempText[i].charCodeAt();
 
-    if (tempCode[i] > 1071 && tempCode[i] < 1104) {resultTemp = resultTemp + originalText[i]};
-    if (tempCode[i] == 32 && resultTemp.substr(-1) !== ' ') {resultTemp = resultTemp + ' '};
+    if (tempCode[i] > 1071 && tempCode[i] < 1104) {
+      resultTemp = resultTemp + originalText[i]
+      };
+    if (tempCode[i] == 32 && resultTemp.substr(-1) !== ' ') {
+      resultTemp = resultTemp + ' '
+      };
   }
-  let tempText2 = resultTemp.toLowerCase().split(' ');
-  let counter = {};
+  const tempText2 = resultTemp.toLowerCase().split(' ');
+  const counter = {};
 
   //счетчик количества букв
   for (let i = 1072; i < 1104; i++) { //цикл по коду букв
@@ -52,9 +55,9 @@ let charRemove = function(string) {
 
 //Math Calculator
 
-let inputMath = document.querySelector('.input-math');
-let resultMath = document.querySelector('.result-math');
-let resultMathButton = document.querySelector('.math-calculator .result');
+const inputMath = document.querySelector('.input-math');
+const resultMath = document.querySelector('.result-math');
+const resultMathButton = document.querySelector('.math-calculator .result');
 
 resultMathButton.addEventListener('click', function(evt) {math();});
 
@@ -62,9 +65,9 @@ inputMath.addEventListener('keypress', function(evt){
   if(event.keyCode == 13) { math();}
 });
 
-let math = function(string) {
-  let tempMatch = inputMath.value.replace(/ /g, '');  //убираем пробелы
-  let mathItems = inputMath.value.match(/\d+(?:\.\d+)?/g);  //разбираем на массив чисел (/\d+(?:[\.]\d+)?/g)
+const math = function(string) {
+  const tempMatch = inputMath.value.replace(/ /g, '');  //убираем пробелы
+  const mathItems = inputMath.value.match(/\d+(?:\.\d+)?/g);  //разбираем на массив чисел (/\d+(?:[\.]\d+)?/g)
   let result = 0;
   let itemStartCounter;
   let counter;
@@ -100,11 +103,16 @@ let math = function(string) {
   for (itemStartCounter; itemStartCounter < mathItems.length; itemStartCounter++) {
 
     switch (tempMatch[counter + 1]) {
-      case '=' : break;
-      case '+' : result += +mathItems[itemStartCounter]; break;
-      case '-' : result -= +mathItems[itemStartCounter]; break;
-      case '*' : result *= +mathItems[itemStartCounter]; break;
-      case '/' : result /= +mathItems[itemStartCounter]; break;
+      case '=' :
+        break;
+      case '+' :
+        result += +mathItems[itemStartCounter]; break;
+      case '-' :
+        result -= +mathItems[itemStartCounter]; break;
+      case '*' :
+        result *= +mathItems[itemStartCounter]; break;
+      case '/' :
+        result /= +mathItems[itemStartCounter]; break;
     }
     counter += mathItems[itemStartCounter].length + 1;
   }
@@ -114,21 +122,18 @@ let math = function(string) {
 
 // Butterfly Control
 
-let butterflyControl = document.querySelector('.butterfly-control');
-let butterflyLeftBlock = document.querySelector('.left-items');
-let butterflyRightBlock = document.querySelector('.right-items');
-let butterflyCentreBlock = document.querySelector('.centre-unit');
-let butterflyCentreBlocks = document.querySelectorAll('.centre-unit .btn');
-let butterflyBlocks = document.querySelectorAll('.butterfly-control .block');
-let alert = document.querySelector('.alert');
-let target = {};
+const butterflyControl = document.querySelector('.butterfly-control');
+const butterflyLeftBlock = document.querySelector('.left-items');
+const butterflyRightBlock = document.querySelector('.right-items');
+const butterflycenterBlock = document.querySelector('.center-unit');
+const butterflycenterBlocks = document.querySelectorAll('.center-unit .btn');
+const butterflyBlocks = document.querySelectorAll('.butterfly-control .block');
+const alert = document.querySelector('.alert');
+const target = {};
 
+const butterfly = function (leftBlock, centerBlock, rightBlock, target){ // функция бабочка работающая с любым подобным блоком
 
-
-
-let butterfly = function (leftBlock, centreBlock, rightBlock, target){ // функция бабочка работающая с любым подобным блоком
-
-  let move = function(from, to) {
+  const move = function(from, to) {
     let al = 0;
     for (let i = 0; i < from.children.length; i++) {
       if (from.children[i].classList.contains('moved')) {
@@ -140,48 +145,44 @@ let butterfly = function (leftBlock, centreBlock, rightBlock, target){ // фун
     if (al < 1) alert.style.display = 'block'; // предупреждение о необходимости выделения блоков
   }
 
-  let moveAll = function(from, to) {
-    let fromLength = from.children.length;
-    let toLength = to.children.length;
+  const moveAll = function(from, to) {
+    const fromLength = from.children.length;
+    const toLength = to.children.length;
     alert.style.display = 'none';
     for (let i = 0; i < fromLength; i++) {
       from.children[0].classList.remove('moved');
       to.appendChild(from.children[0]);
   }}
 
-  switch (target.parentNode) {
-    case leftBlock:
-    case rightBlock:
-      event.target.classList.toggle('moved');
-      alert.style.display = 'none';
-      break;
-    case centreBlock:
-      switch (event.target) {
-        case butterflyCentreBlocks[0]:
+  if (event.target.classList.contains('block')) {
+    event.target.classList.toggle('moved');
+    alert.style.display = 'none';
+  }
+  switch (event.target) {
+        case butterflycenterBlocks[0]:
           moveAll(leftBlock, rightBlock);
           break;
-        case butterflyCentreBlocks[1]:
+        case butterflycenterBlocks[1]:
           move(leftBlock, rightBlock);
           break;
-        case butterflyCentreBlocks[2]:
+        case butterflycenterBlocks[2]:
           move(rightBlock, leftBlock);
           break;
-        case butterflyCentreBlocks[3]:
+        case butterflycenterBlocks[3]:
           moveAll(rightBlock, leftBlock);
           break;
-      }
   }
   }
 // вызов функции бабочка с передачей ей аргументов именно этой бабочки
 butterflyControl.addEventListener('mousedown', function(evt){
-  butterfly (butterflyLeftBlock, butterflyCentreBlock, butterflyRightBlock, evt.target);
+  butterfly (butterflyLeftBlock, butterflycenterBlock, butterflyRightBlock, evt.target);
 });
 
 
 
 //Simple Gallery
 
-let startBlock = document.querySelector('.slider-start');
+const startBlock = document.querySelector('.slider-start');
 startBlock.addEventListener('click', function(evt){  // Кнопки управления перелистывание
-  let win = window.open('index1.html', 'win');
+  const win = window.open('index1.html', 'win');
 })
