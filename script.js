@@ -127,6 +127,7 @@ const butterflyLeftBlock = document.querySelector('.left-items');
 const butterflyRightBlock = document.querySelector('.right-items');
 const butterflycenterBlock = document.querySelector('.center-unit');
 const butterflycenterBlocks = document.querySelectorAll('.center-unit .btn');
+const [allToRight, selectedToRight, selectedToLeft, allToLeft] = butterflycenterBlocks;
 const butterflyBlocks = document.querySelectorAll('.butterfly-control .block');
 const alert = document.querySelector('.alert');
 const target = {};
@@ -159,16 +160,16 @@ const butterfly = function (leftBlock, centerBlock, rightBlock, target){ // фу
     alert.style.display = 'none';
   }
   switch (event.target) {
-        case butterflycenterBlocks[0]:
+        case allToRight:
           moveAll(leftBlock, rightBlock);
           break;
-        case butterflycenterBlocks[1]:
+        case selectedToRight:
           move(leftBlock, rightBlock);
           break;
-        case butterflycenterBlocks[2]:
+        case selectedToLeft:
           move(rightBlock, leftBlock);
           break;
-        case butterflycenterBlocks[3]:
+        case allToLeft:
           moveAll(rightBlock, leftBlock);
           break;
   }
