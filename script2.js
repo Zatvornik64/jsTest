@@ -12,7 +12,7 @@ const interval = 11;  //Интервал перелистывания, сек
 let pageInterval;
 let count = interval;
 let currentPage = (+window.location.href.replace('.html', '').split('').slice(-1) - 1);
-let pageGo = 1;
+let pageGo = true;
 
 const nextpage = function() {
     count--;
@@ -35,13 +35,13 @@ pagesBlock.addEventListener('click', function(evt){  // Кнопки управ�
   switch (event.target) {
   case stopBtn: { // действие кнопки Стоп
     clearInterval(pageInterval);
-    pageGo = 0;
+    pageGo = false;
     break;
     }
   case playBtn: {
     if (!pageGo) {
       pageInterval = setInterval(nextpage,1000);
-      pageGo = 1;
+      pageGo = true;
     }
     break;
     }
