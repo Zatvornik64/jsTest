@@ -20,8 +20,12 @@ const charRemove = function(string) {
   for (let i = 0; i < tempText.length; i++) {
     tempCode[i] = tempText[i].charCodeAt();
 
-    if (tempCode[i] > 1071 && tempCode[i] < 1104) {resultTemp = resultTemp + originalText[i]};
-    if (tempCode[i] == 32 && resultTemp.substr(-1) !== ' ') {resultTemp = resultTemp + ' '};
+    if (tempCode[i] > 1071 && tempCode[i] < 1104) {
+      resultTemp = resultTemp + originalText[i]
+      };
+    if (tempCode[i] == 32 && resultTemp.substr(-1) !== ' ') {
+      resultTemp = resultTemp + ' '
+      };
   }
   const tempText2 = resultTemp.toLowerCase().split(' ');
   const counter = {};

@@ -12,12 +12,15 @@ h2 {
 p {
   margin-left: 20px;
 }
+label {
+  margin-left: 20px;
+}
 .words {
   width: 90%;
   height: 30px;
   line-height: 30px;
   padding-left: 2px;
-  margin-left: 20px;
+  margin: 5px 0 20px 20px;
   background-color: white;
   color: black;
 }
