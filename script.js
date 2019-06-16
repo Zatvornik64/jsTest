@@ -14,7 +14,29 @@ if(event.keyCode == 13) {
 const charRemove = function(string) {
   const tempText = inputText.value.toLowerCase().split('');
   const originalText = inputText.value.split('');
-  
+  const punctuationMark = [' ', ',', '.', '!', '?', ';', ':'];
+  const words = inputText.value.toLowerCase().split(' ');
+  console.log(words);
+  let count = [];
+  let resultTemp = [];
+
+  for (i = 0; i < words.length; i++) {
+    for (j = 0; j < words[i].length; j++) {
+      count[i + j] = 0;
+      for (k = 0; k < words[i].length; k++) {
+        if (words[i][j] === words[i][k]){
+          count[i + j]++;
+
+        }
+        //str.split('.').join('-')
+
+      }
+      console.log(words[i][j], count[i + j]);
+    }
+  }
+
+
+
   /*let tempCode = [];
   let resultTemp = [];
 
@@ -48,8 +70,8 @@ const charRemove = function(string) {
     tempCode[i] = resultTemp[i].charCodeAt();
     if (counter[resultTemp[i].toLowerCase().charCodeAt() - 1072] == 0)  {resultTemp2 = resultTemp2 + resultTemp[i]};
     if (tempCode[i] == 32) {resultTemp2 = resultTemp2 + ' '};
-  }*/
-  resultText.textContent = resultTemp2;
+  }
+  resultText.textContent = resultTemp2;*/
 }
 
 
