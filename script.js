@@ -14,7 +14,8 @@ if(event.keyCode == 13) {
 const charRemove = function(string) {
   const tempText = inputText.value.toLowerCase().split('');
   const originalText = inputText.value.split('');
-  let tempCode = [];
+  
+  /*let tempCode = [];
   let resultTemp = [];
 
   for (let i = 0; i < tempText.length; i++) {
@@ -47,7 +48,7 @@ const charRemove = function(string) {
     tempCode[i] = resultTemp[i].charCodeAt();
     if (counter[resultTemp[i].toLowerCase().charCodeAt() - 1072] == 0)  {resultTemp2 = resultTemp2 + resultTemp[i]};
     if (tempCode[i] == 32) {resultTemp2 = resultTemp2 + ' '};
-  }
+  }*/
   resultText.textContent = resultTemp2;
 }
 
