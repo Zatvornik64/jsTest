@@ -19,14 +19,14 @@ const charRemove = function(string) {
   let result = [];
   let exception = inputText.value.toLowerCase().split('');
 
-  for (let i = 0; i < words.length; i++) {
+  for (let i = 0; i < words.length; i++) {  //Находим массив символов исключений
     let tempWord = words[i].split('').sort();
     for (let j = 1; j < tempWord.length; j++) {
       if (tempWord[j] == tempWord[j-1]) {
-        exception = exception.join('').split(tempWord[j]).join('').split('');
+        exception = exception.join('').split(tempWord[j]).join('').split(''); //вырезаем из массива исключений повторяющиеся символы 
       }}};
 
-  for (let i = 0; i < originalText.length; i++) {
+  for (let i = 0; i < originalText.length; i++) { //собираем результирующий массив используя массивы знаков препинания и исключений
     if (punctuationMark.indexOf(originalText[i].toLowerCase()) != -1) {
       result.push(originalText[i]);
     }
@@ -54,7 +54,7 @@ inputMath.addEventListener('keypress', function(evt){
 
 const math = function(string) {
   const tempMatch = inputMath.value.replace(/ /g, '');  //убираем пробелы
-  const mathItems = inputMath.value.match(/\d+(?:\.\d+)?/g);  //разбираем на массив чисел (/\d+(?:[\.]\d+)?/g)
+  const mathItems = inputMath.value.match(/\d+(?:\.\d+)?/g);  //разбираем на массив чисел
   let result = 0;
   let itemStartCounter;
   let counter;
