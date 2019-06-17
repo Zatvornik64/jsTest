@@ -18,9 +18,22 @@ const charRemove = function(string) {
   const words = inputText.value.toLowerCase().split(' ');
   console.log(words);
   let count = [];
-  let resultTemp = [];
+  let resultTemp = inputText.value.split('');
 
   for (i = 0; i < words.length; i++) {
+    let tempWord = words[i].split('').sort();
+    console.log(tempWord);
+    for (j = 1; j < tempWord.length; j++) {
+      if (tempWord[j] == tempWord[j-1]) {
+        console.log(words[i][j]);
+        resultTemp = resultTemp.join('').split(tempWord[j]).join('').split('');
+      }
+    }
+    console.log(resultTemp.join(''));
+  }
+
+
+/*  for (i = 0; i < words.length; i++) {
     for (j = 0; j < words[i].length; j++) {
       count[i + j] = 0;
       for (k = 0; k < words[i].length; k++) {
