@@ -12,43 +12,30 @@ if(event.keyCode == 13) {
 }});
 
 const charRemove = function(string) {
-  const tempText = inputText.value.toLowerCase().split('');
   const originalText = inputText.value.split('');
-  let tempCode = [];
-  let resultTemp = [];
+  const punctuationMark = [' ', ',', '.', '!', '?', ';', ':'];
+  const words = inputText.value.toLowerCase().split(' ');
 
-  for (let i = 0; i < tempText.length; i++) {
-    tempCode[i] = tempText[i].charCodeAt();
+  let result = [];
+  let exception = inputText.value.toLowerCase().split('');
 
-    if (tempCode[i] > 1071 && tempCode[i] < 1104) {
-      resultTemp = resultTemp + originalText[i]
-      };
-    if (tempCode[i] == 32 && resultTemp.substr(-1) !== ' ') {
-      resultTemp = resultTemp + ' '
-      };
-  }
-  const tempText2 = resultTemp.toLowerCase().split(' ');
-  const counter = {};
+  for (let i = 0; i < words.length; i++) {
+    let tempWord = words[i].split('').sort();
+    for (let j = 1; j < tempWord.length; j++) {
+      if (tempWord[j] == tempWord[j-1]) {
+        exception = exception.join('').split(tempWord[j]).join('').split('');
+      }}};
 
-  //счетчик количества букв
-  for (let i = 1072; i < 1104; i++) { //цикл по коду букв
-    counter[i - 1072] = 0;
-    for (let k=0; k < tempText2.length; k++) { //цикл по количеству слов
-
-    for (let j = 0; j < tempText2[k].length; j++) { //цикл по буквам в словах
-      if (i == tempText2[k][j].toLowerCase().charCodeAt()) {counter[i - 1072]++}
+  for (let i = 0; i < originalText.length; i++) {
+    if (punctuationMark.indexOf(originalText[i].toLowerCase()) != -1) {
+      result.push(originalText[i]);
     }
-      if (counter[i - 1072] == 1) counter[i - 1072] = 0; //сброс счетчика при одинственной букве в слове
-    }}
+    else {
+      if (exception.indexOf(originalText[i].toLowerCase()) != -1) {
+        result.push(originalText[i]);
+    }}};
 
-  //сборка текста из оригинального без букв определенных в счетчике выше
-  let resultTemp2 = [];
-  for (let i = 0; i < resultTemp.length; i++) {
-    tempCode[i] = resultTemp[i].charCodeAt();
-    if (counter[resultTemp[i].toLowerCase().charCodeAt() - 1072] == 0)  {resultTemp2 = resultTemp2 + resultTemp[i]};
-    if (tempCode[i] == 32) {resultTemp2 = resultTemp2 + ' '};
-  }
-  resultText.textContent = resultTemp2;
+  resultText.textContent = result.join('');
 }
 
 
