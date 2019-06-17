@@ -12,79 +12,30 @@ if(event.keyCode == 13) {
 }});
 
 const charRemove = function(string) {
-  const tempText = inputText.value.toLowerCase().split('');
   const originalText = inputText.value.split('');
   const punctuationMark = [' ', ',', '.', '!', '?', ';', ':'];
   const words = inputText.value.toLowerCase().split(' ');
-  console.log(words);
-  let count = [];
-  let resultTemp = inputText.value.split('');
 
-  for (i = 0; i < words.length; i++) {
+  let result = [];
+  let exception = inputText.value.toLowerCase().split('');
+
+  for (let i = 0; i < words.length; i++) {
     let tempWord = words[i].split('').sort();
-    console.log(tempWord);
-    for (j = 1; j < tempWord.length; j++) {
+    for (let j = 1; j < tempWord.length; j++) {
       if (tempWord[j] == tempWord[j-1]) {
-        console.log(words[i][j]);
-        resultTemp = resultTemp.join('').split(tempWord[j]).join('').split('');
-      }
+        exception = exception.join('').split(tempWord[j]).join('').split('');
+      }}};
+
+  for (let i = 0; i < originalText.length; i++) {
+    if (punctuationMark.indexOf(originalText[i].toLowerCase()) != -1) {
+      result.push(originalText[i]);
     }
-    console.log(resultTemp.join(''));
-  }
+    else {
+      if (exception.indexOf(originalText[i].toLowerCase()) != -1) {
+        result.push(originalText[i]);
+    }}};
 
-
-/*  for (i = 0; i < words.length; i++) {
-    for (j = 0; j < words[i].length; j++) {
-      count[i + j] = 0;
-      for (k = 0; k < words[i].length; k++) {
-        if (words[i][j] === words[i][k]){
-          count[i + j]++;
-
-        }
-        //str.split('.').join('-')
-
-      }
-      console.log(words[i][j], count[i + j]);
-    }
-  }
-
-
-
-  /*let tempCode = [];
-  let resultTemp = [];
-
-  for (let i = 0; i < tempText.length; i++) {
-    tempCode[i] = tempText[i].charCodeAt();
-
-    if (tempCode[i] > 1071 && tempCode[i] < 1104) {
-      resultTemp = resultTemp + originalText[i]
-      };
-    if (tempCode[i] == 32 && resultTemp.substr(-1) !== ' ') {
-      resultTemp = resultTemp + ' '
-      };
-  }
-  const tempText2 = resultTemp.toLowerCase().split(' ');
-  const counter = {};
-
-  //счетчик количества букв
-  for (let i = 1072; i < 1104; i++) { //цикл по коду букв
-    counter[i - 1072] = 0;
-    for (let k=0; k < tempText2.length; k++) { //цикл по количеству слов
-
-    for (let j = 0; j < tempText2[k].length; j++) { //цикл по буквам в словах
-      if (i == tempText2[k][j].toLowerCase().charCodeAt()) {counter[i - 1072]++}
-    }
-      if (counter[i - 1072] == 1) counter[i - 1072] = 0; //сброс счетчика при одинственной букве в слове
-    }}
-
-  //сборка текста из оригинального без букв определенных в счетчике выше
-  let resultTemp2 = [];
-  for (let i = 0; i < resultTemp.length; i++) {
-    tempCode[i] = resultTemp[i].charCodeAt();
-    if (counter[resultTemp[i].toLowerCase().charCodeAt() - 1072] == 0)  {resultTemp2 = resultTemp2 + resultTemp[i]};
-    if (tempCode[i] == 32) {resultTemp2 = resultTemp2 + ' '};
-  }
-  resultText.textContent = resultTemp2;*/
+  resultText.textContent = result.join('');
 }
 
 
