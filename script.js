@@ -15,7 +15,6 @@ const charRemove = function(string) {
   const originalText = inputText.value.split('');
   const punctuationMark = [' ', ',', '.', '!', '?', ';', ':'];
   const words = inputText.value.toLowerCase().split(' ');
-
   let result = [];
   let exception = inputText.value.toLowerCase().split('');
 
@@ -23,7 +22,7 @@ const charRemove = function(string) {
     let tempWord = words[i].split('').sort();
     for (let j = 1; j < tempWord.length; j++) {
       if (tempWord[j] == tempWord[j-1]) {
-        exception = exception.join('').split(tempWord[j]).join('').split(''); //вырезаем из массива исключений повторяющиеся символы 
+        exception = exception.join('').split(tempWord[j]).join('').split(''); //вырезаем из массива исключений повторяющиеся символы
       }}};
 
   for (let i = 0; i < originalText.length; i++) { //собираем результирующий массив используя массивы знаков препинания и исключений
@@ -112,14 +111,11 @@ const math = function(string) {
 const butterflyControl = document.querySelector('.butterfly-control');
 const butterflyLeftBlock = document.querySelector('.left-items');
 const butterflyRightBlock = document.querySelector('.right-items');
-const butterflycenterBlock = document.querySelector('.center-unit');
 const butterflycenterBlocks = document.querySelectorAll('.center-unit .btn');
 const [allToRight, selectedToRight, selectedToLeft, allToLeft] = butterflycenterBlocks;
-const butterflyBlocks = document.querySelectorAll('.butterfly-control .block');
 const alert = document.querySelector('.alert');
-const target = {};
 
-const butterfly = function (leftBlock, centerBlock, rightBlock, target){ // функция бабочка работающая с любым подобным блоком
+const butterfly = function (leftBlock, rightBlock){ // функция бабочка работающая с любым подобным блоком
 
   const move = function(from, to) {
     let al = 0;
@@ -163,7 +159,7 @@ const butterfly = function (leftBlock, centerBlock, rightBlock, target){ // фу
   }
 // вызов функции бабочка с передачей ей аргументов именно этой бабочки
 butterflyControl.addEventListener('mousedown', function(evt){
-  butterfly (butterflyLeftBlock, butterflycenterBlock, butterflyRightBlock, evt.target);
+  butterfly (butterflyLeftBlock, butterflyRightBlock);
 });
 
 
