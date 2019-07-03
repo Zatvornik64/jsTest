@@ -10,7 +10,6 @@ inputText.addEventListener('keypress', function(evt){
 if(event.keyCode == 13) {
   charRemove();
 }});
-
 const charRemove = function(string) {
   const originalText = inputText.value.split('');
   const punctuationMark = [' ', ',', '.', '!', '?', ';', ':'];

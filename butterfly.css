@@ -1,0 +1,61 @@
+h2 {
+  font-size: 36px;
+  margin-left: 20px;
+}
+p {
+  margin-left: 20px;
+}
+.butterfly-control {
+  margin-left: 80px;
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 22px;
+  width: 600px;
+  height: 200px;
+  border: 2px solid #777777;
+  border-radius: 15px;
+}
+.butterfly-control .center-unit {
+  margin-top: 45px;
+}
+.butterfly-control .left-unit, .right-unit {
+  margin-top: 20px;
+}
+.butterfly-control b {
+  margin-left: 10px;
+}
+.butterfly-control .btn {
+  background-color: #eeeeee;
+  border: 2px solid #777777;
+  border-radius: 10px;
+  width: 70px;
+  margin-top: 3px;
+  text-align: center;
+  cursor: pointer;
+
+}
+.butterfly-control .items {
+  width: 100px;
+  height: 130px;
+  border: 2px solid #777777;
+  border-radius: 8px;
+}
+.butterfly-control .block {
+  cursor: pointer;
+  text-align: center;
+}
+.butterfly-control .moved {
+  background-color: #777777;
+}
+.alert {
+  position: absolute;
+  margin-top: -50px;
+  height: 30px;
+  width: 600px;
+  line-height: 30px;
+  background-color: #999999;
+  border: 2px solid black;
+  border-radius: 15px;
+  display: none;
+}
