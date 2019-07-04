@@ -10,31 +10,7 @@
   </head>
   <body>
 
-    <section class="butterfly-control">
-        <!--
-        <div class="left-unit">
-          <b>Available</b>
-          <div class="left-items items">
-            <div class="block">Option 1</div>
-            <div class="block">Option 2</div>
-            <div class="block">Option 3</div>
-
-          </div>
-        </div>
-        <div class="center-unit">
-          <div class="all-to-right btn">>></div>
-          <div class="to-right btn">></div>
-          <div class="to-left btn"><</div>
-          <div class="all-to-left btn"><<</div>
-        </div>
-        <div class="right-unit">
-          <b>Selected</b>
-          <div class="right-items items">
-            <div class="block">Option 4</div>
-            <div class="block">Option 5</div>
-          </div>
-        </div>
-      -->
+    <section class="butterfly-control-block">
         <div class="alert">
           <b>Пожалуйста выделите элемент который хотите перенести</b>
         </div>
@@ -43,6 +19,109 @@
 
   </body>
 
-<script type="text/babel" src="batterfly.js"></script>
+<script type="text/babel">
+
+const items = [
+  {
+    id: 0,
+    text: 'option 1',
+    onLeft: true
+  },
+  {
+    id: 1,
+    text: 'option 2',
+    onLeft: true
+  },
+  {
+    id: 2,
+    text: 'option 3',
+    onLeft: true
+  },
+  {
+    id: 3,
+    text: 'option 4',
+    onLeft: false
+  },
+  {
+    id: 4,
+    text: 'option 5',
+    onLeft: true
+  }
+];
+
+const LeftUnit = () => {
+  return (
+  <div className="left-unit">
+    <b>Available</b>
+    <div className="left-items items">
+      {items[0].onLeft ? <div key = {items[0].id} id = {items[0].id} className = "block">{items[0].text}</div> : null}
+      {items[1].onLeft ? <div key = {items[1].id} id = {items[1].id} className = "block">{items[1].text}</div> : null}
+      {items[2].onLeft ? <div key = {items[2].id} id = {items[2].id} className = "block">{items[2].text}</div> : null}
+      {items[3].onLeft ? <div key = {items[3].id} id = {items[3].id} className = "block">{items[3].text}</div> : null}
+      {items[4].onLeft ? <div key = {items[4].id} id = {items[4].id} className = "block">{items[4].text}</div> : null}
+      
+    </div>
+  </div>
+  )
+}
+
+const RightUnit = () => {
+
+  return (
+    <div className="right-unit" >
+      <b>Selected</b>
+      <div className="right-items items">
+      {!items[0].onLeft ? <div key = {items[0].id} id = {items[0].id} className = "block">{items[0].text}</div> : null}
+      {!items[1].onLeft ? <div key = {items[1].id} id = {items[1].id} className = "block">{items[1].text}</div> : null}
+      {!items[2].onLeft ? <div key = {items[2].id} id = {items[2].id} className = "block">{items[2].text}</div> : null}
+      {!items[3].onLeft ? <div key = {items[3].id} id = {items[3].id} className = "block">{items[3].text}</div> : null}
+      {!items[4].onLeft ? <div key = {items[4].id} id = {items[4].id} className = "block">{items[4].text}</div> : null}
+      </div>
+    </div>
+  )
+}
+
+const CenterUnit = () => {
+  return (
+    <div className="center-unit">
+      <div className="all-to-right btn"> {String.fromCharCode(62)}{String.fromCharCode(62)} </div>
+      <div className="to-right move btn"> {String.fromCharCode(62)} </div>
+      <div className="to-left move btn"> {String.fromCharCode(60)} </div>
+      <div className="all-to-left btn"> {String.fromCharCode(60)}{String.fromCharCode(60)} </div>
+    </div>
+  )
+}
+
+class App extends React.Component {
+
+  handleClick = (evt) => {
+    if (evt.target.classList.contains('block') )
+    {
+      evt.target.classList.toggle('moved');
+      items[evt.target.id].onLeft = !items[evt.target.id].onLeft;
+    }
+
+    if (evt.target.classList.contains('move') )
+    {
+      this.forceUpdate()
+    }}
+
+  render() {
+  return (
+    <div onClick={this.handleClick} className="butterfly-control">
+      <LeftUnit />
+      <CenterUnit />
+      <RightUnit />
+    </div>
+  )
+}}
+
+ReactDOM.render(
+  <App />,
+  document.querySelector('.butterfly-control-block')
+);
+
+
+</script>
 
 </html>
