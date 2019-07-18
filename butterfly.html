@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 		<link href="butterfly.css" rel="stylesheet">
-  <title>Butterfly JS Test</title>
+  <title>Butterfly React Test</title>
   <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
@@ -21,45 +21,51 @@
 
 <script type="text/babel">
 
-const items = [
+let items = [
   {
     id: 0,
     text: 'option 1',
-    onLeft: true
+    onLeft: true,
+    toMove: false
   },
   {
     id: 1,
     text: 'option 2',
-    onLeft: true
+    onLeft: true,
+    toMove: false
   },
   {
     id: 2,
     text: 'option 3',
-    onLeft: true
+    onLeft: true,
+    toMove: false
   },
   {
     id: 3,
     text: 'option 4',
-    onLeft: false
+    onLeft: false,
+    toMove: false
   },
   {
     id: 4,
     text: 'option 5',
-    onLeft: true
+    onLeft: true,
+    toMove: false
   }
 ];
 
 const LeftUnit = () => {
+
+  let itemsTemplate = items.map(function(item) {
+         return (
+           item.onLeft ? <div key={item.id} id = {item.id} className = "block">{item.text}</div> : null
+         )})
+
   return (
   <div className="left-unit">
     <b>Available</b>
     <div className="left-items items">
-      {items[0].onLeft ? <div key = {items[0].id} id = {items[0].id} className = "block">{items[0].text}</div> : null}
-      {items[1].onLeft ? <div key = {items[1].id} id = {items[1].id} className = "block">{items[1].text}</div> : null}
-      {items[2].onLeft ? <div key = {items[2].id} id = {items[2].id} className = "block">{items[2].text}</div> : null}
-      {items[3].onLeft ? <div key = {items[3].id} id = {items[3].id} className = "block">{items[3].text}</div> : null}
-      {items[4].onLeft ? <div key = {items[4].id} id = {items[4].id} className = "block">{items[4].text}</div> : null}
-      
+      {itemsTemplate}
     </div>
   </div>
   )
@@ -67,15 +73,16 @@ const LeftUnit = () => {
 
 const RightUnit = () => {
 
+  let itemsTemplate = items.map(function(item) {
+         return (
+           !item.onLeft ? <div key={item.id}  id = {item.id} className = "block">{item.text}</div> : null
+         )})
+
   return (
     <div className="right-unit" >
       <b>Selected</b>
       <div className="right-items items">
-      {!items[0].onLeft ? <div key = {items[0].id} id = {items[0].id} className = "block">{items[0].text}</div> : null}
-      {!items[1].onLeft ? <div key = {items[1].id} id = {items[1].id} className = "block">{items[1].text}</div> : null}
-      {!items[2].onLeft ? <div key = {items[2].id} id = {items[2].id} className = "block">{items[2].text}</div> : null}
-      {!items[3].onLeft ? <div key = {items[3].id} id = {items[3].id} className = "block">{items[3].text}</div> : null}
-      {!items[4].onLeft ? <div key = {items[4].id} id = {items[4].id} className = "block">{items[4].text}</div> : null}
+       {itemsTemplate}
       </div>
     </div>
   )
@@ -98,13 +105,64 @@ class App extends React.Component {
     if (evt.target.classList.contains('block') )
     {
       evt.target.classList.toggle('moved');
-      items[evt.target.id].onLeft = !items[evt.target.id].onLeft;
+      items.forEach(function(item) {
+      if (item.id == evt.target.id) item.toMove = !item.toMove;
+      })
+      console.log(items);
+      console.log(evt.target.id);
+      
     }
 
-    if (evt.target.classList.contains('move') )
+    if (evt.target.classList.contains('to-right') )
     {
+      let tempItems = items;
+      items.forEach(function(item, index) {
+        console.log(item.text)
+        
+        if (item.toMove & item.onLeft) {
+          
+          tempItems.push(tempItems[index]);
+          tempItems.splice(index, 1);
+          item.onLeft = false;
+          item.toMove = false;
+          
+        }
+      })
+      items = tempItems;
       this.forceUpdate()
-    }}
+    }
+
+    if (evt.target.classList.contains('to-left') )
+    {
+      console.log(items)
+      items.forEach(function(item, index) {
+        if (item.toMove & !item.onLeft) {
+          items.push(items[index]);
+          items.splice(index, 1);
+          item.onLeft = true;
+          item.toMove = false;
+        }
+      })
+      this.forceUpdate()
+    }
+    
+    if (evt.target.classList.contains('all-to-right') )
+    {
+      
+      items.forEach(function(item) {
+        item.onLeft = false;
+      });
+      this.forceUpdate()
+    }
+    if (evt.target.classList.contains('all-to-left') )
+    {
+      
+      items.forEach(function(item) {
+        item.onLeft = true;
+      });
+      this.forceUpdate()
+    }
+  }
 
   render() {
   return (
