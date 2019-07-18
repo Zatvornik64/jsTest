@@ -115,20 +115,32 @@ class App extends React.Component {
 
     if (evt.target.classList.contains('to-right') )
     {
-      let tempItems = items;
-      items.forEach(function(item, index) {
-        console.log(item.text)
-        
-        if (item.toMove & item.onLeft) {
-          
-          tempItems.push(tempItems[index]);
-          tempItems.splice(index, 1);
-          item.onLeft = false;
-          item.toMove = false;
-          
+      
+      /*items.forEach(function(item, index) {
+        console.log(item.text);
+         if (item.toMove & item.onLeft) {
+          items.push(items[index]);
+          items.splice(index, 1);
         }
       })
-      items = tempItems;
+      items.forEach(function(item, index) {
+        //console.log(item.text)
+        if (item.toMove & item.onLeft) {
+          item.onLeft = false;
+          item.toMove = false;
+        }
+      })*/
+      for (let i = 0; i < items.length; i++) {
+        console.log(items[i].text);
+        if (items[i].toMove & items[i].onLeft) {
+          items.push(items[i]);
+          items.splice(i, 1);
+          items[i].onLeft = false;
+          items[i].toMove = false;
+          i--;
+        }
+      }
+      
       this.forceUpdate()
     }
 
