@@ -11,9 +11,6 @@
   <body>
 
     <section class="butterfly-control-block">
-        <div class="alert">
-          <b>Пожалуйста выделите элемент который хотите перенести</b>
-        </div>
     </section>
 
 
@@ -53,6 +50,7 @@ let items = [
     toMove: false
   }
 ];
+let alarmOpen = false;
 
 const LeftUnit = () => {
 
@@ -98,6 +96,17 @@ const CenterUnit = () => {
     </div>
   )
 }
+const AlarmUnit = () => {
+  return (
+    <React.Fragment>
+    { alarmOpen &&
+    <div className="alert">
+      <b>Пожалуйста выделите элемент который хотите перенести</b>
+    </div>
+    }
+    </React.Fragment>
+  )
+}
 
 class App extends React.Component {
 
@@ -105,56 +114,62 @@ class App extends React.Component {
     if (evt.target.classList.contains('block') )
     {
       evt.target.classList.toggle('moved');
+      alarmOpen = false;
       items.forEach(function(item) {
       if (item.id == evt.target.id) item.toMove = !item.toMove;
       })
-      console.log(items);
-      console.log(evt.target.id);
-      
+      this.forceUpdate();
     }
 
     if (evt.target.classList.contains('to-right') )
     {
-      
-      /*items.forEach(function(item, index) {
-        console.log(item.text);
-         if (item.toMove & item.onLeft) {
-          items.push(items[index]);
-          items.splice(index, 1);
+      alarmOpen = true;
+      let tempItems = [];
+      items.forEach(function(item, index) {
+        if (!item.toMove & item.onLeft) {
+          tempItems.push(item);
         }
       })
       items.forEach(function(item, index) {
-        //console.log(item.text)
+        if (!item.onLeft) {
+          tempItems.push(item);
+        }
+      })
+      items.forEach(function(item) {
         if (item.toMove & item.onLeft) {
+          tempItems.push(item);
+          alarmOpen = false;
           item.onLeft = false;
           item.toMove = false;
         }
-      })*/
-      for (let i = 0; i < items.length; i++) {
-        console.log(items[i].text);
-        if (items[i].toMove & items[i].onLeft) {
-          items.push(items[i]);
-          items.splice(i, 1);
-          items[i].onLeft = false;
-          items[i].toMove = false;
-          i--;
-        }
-      }
-      
+      })
+      items = tempItems;
       this.forceUpdate()
     }
 
     if (evt.target.classList.contains('to-left') )
     {
-      console.log(items)
+      alarmOpen = true;
+      let tempItems = [];
+      items.forEach(function(item, index) {
+        if (!item.toMove & !item.onLeft) {
+          tempItems.push(item);
+        }
+      })
+      items.forEach(function(item, index) {
+        if (item.onLeft) {
+          tempItems.push(item);
+        }
+      })
       items.forEach(function(item, index) {
         if (item.toMove & !item.onLeft) {
-          items.push(items[index]);
-          items.splice(index, 1);
+          tempItems.push(item);
+          alarmOpen = false;
           item.onLeft = true;
           item.toMove = false;
         }
       })
+      items = tempItems;
       this.forceUpdate()
     }
     
@@ -163,6 +178,7 @@ class App extends React.Component {
       
       items.forEach(function(item) {
         item.onLeft = false;
+        item.toMove = false;
       });
       this.forceUpdate()
     }
@@ -171,6 +187,7 @@ class App extends React.Component {
       
       items.forEach(function(item) {
         item.onLeft = true;
+        item.toMove = false;
       });
       this.forceUpdate()
     }
@@ -182,6 +199,7 @@ class App extends React.Component {
       <LeftUnit />
       <CenterUnit />
       <RightUnit />
+      <AlarmUnit />
     </div>
   )
 }}
